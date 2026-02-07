@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { V1AlphaPluginContext } from "../context.js";
+import { PluginContext } from "../context.js";
 import {
   JournalEvent,
   JournalEvent_BI,
@@ -51,7 +51,7 @@ export function useJournalEvents<T extends Mode>(
     file: string;
   }) => void,
 ): undefined {
-  const ctx = useContext(V1AlphaPluginContext);
+  const ctx = useContext(PluginContext);
 
   // Keep latest callback without re-subscribing
   const cbRef = useRef(cb);
