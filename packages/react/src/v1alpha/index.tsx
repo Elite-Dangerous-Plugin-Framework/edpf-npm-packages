@@ -52,6 +52,4 @@ export function makeSettingsV1Alpha(
 }
 
 export * from "./context.js";
-export * from "./hooks/useBundledResource.js";
-export * from "./hooks/useJournalEvents.js";
-export * from "./hooks/usePluginSetting.js";
+export * from "./hooks/index.js";

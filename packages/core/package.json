@@ -16,10 +16,14 @@
     "pretty": "prettier src -w"
   },
   "types": "dist/index.d.ts",
-  "version": "0.0.0",
   "exports": {
     ".": "./dist/index.js",
     "./v1alpha": "./dist/v1alpha/index.js",
     "./package.json": "./package.json"
-  }
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
+  "version": "0.0.1-pre5"
 }
