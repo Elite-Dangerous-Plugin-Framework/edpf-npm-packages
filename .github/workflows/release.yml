@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          always-auth: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Extract version from tag
+      # We extract e.g. 1.2.3-pre5 from refs/tags/v1.2.3-pre5
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Releasing version $VERSION"
+
+      # Take the version from the prev step and apply it to all changed packages
+      # We always deploy all packages, even if no change was found.
+      # While we don't plan on doing breaking changes between versions, even on Major 0, it is still
+      # best to use the same Version across all dependencies.
+      - name: Set Lerna version
+        run: |
+          npx lerna version ${{ steps.version.outputs.version }} \
+            --yes \
+            --no-git-tag-version \
+            --no-private \
+            --no-push
+
+      # Build all packages
+      - name: Build packages
+        run: npx lerna run build
+
+      # Publish to npm
+      - name: Publish packages
+        run: npx lerna publish from-package --yes --no-private
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
