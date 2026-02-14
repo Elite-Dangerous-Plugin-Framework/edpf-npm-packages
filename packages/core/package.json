@@ -1,5 +1,4 @@
 {
-  "devDependencies": {},
   "private": false,
   "name": "@elite-dangerous-plugin-framework/core",
   "description": "Core Plugin Library for Elite: Dangerous Plugin Framework. This provides mostly types and helpers to interact with EDPF, as well as an abstraction layer around the HTMLElement used by plugins.",
@@ -11,6 +10,9 @@
     "dist",
     "README.md"
   ],
+  "repository": {
+    "url": "https://github.com/Elite-Dangerous-Plugin-Framework/edpf-npm-packages-journal"
+  },
   "scripts": {
     "build": "tsdown",
     "pretty": "prettier src -w"
@@ -25,5 +27,5 @@
     "provenance": true,
     "access": "public"
   },
-  "version": "0.0.1-pre5"
+  "version": "0.0.1-pre1"
 }

@@ -12,6 +12,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "repository": {
+    "url": "https://github.com/Elite-Dangerous-Plugin-Framework/edpf-npm-packages-journal"
+  },
   "type": "module",
   "files": [
     "dist",
@@ -36,8 +39,8 @@
     "provenance": true,
     "access": "public"
   },
-  "version": "0.0.1-pre5",
+  "version": "0.0.1-pre1",
   "dependencies": {
-    "@elite-dangerous-plugin-framework/core": "^0.0.1-pre5"
+    "@elite-dangerous-plugin-framework/core": "^0.0.1-pre1"
   }
 }

@@ -48,6 +48,18 @@ jobs:
             --no-git-tag-version \
             --no-private \
             --no-push
+      - name: Determine npm dist-tag
+        id: disttag
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          if [[ "$VERSION" == *"-pre"* ]]; then
+            echo "dist_tag=next" >> $GITHUB_OUTPUT
+            echo "Pre-release detected → using dist-tag 'next'"
+          else
+            echo "dist_tag=latest" >> $GITHUB_OUTPUT
+            echo "Stable release → using dist-tag 'latest'"
+          fi
 
       # Build all packages
       - name: Build packages
@@ -55,6 +67,9 @@ jobs:
 
       # Publish to npm
       - name: Publish packages
-        run: npx lerna publish from-package --yes --no-private
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [[ "${{ steps.disttag.outputs.dist_tag }}" == "next" ]]; then
+            npx lerna publish from-package --yes --no-private --dist-tag next
+          else
+            npx lerna publish from-package --yes --no-private
+          fi
