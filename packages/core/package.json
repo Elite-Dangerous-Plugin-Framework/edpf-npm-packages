@@ -11,7 +11,7 @@
     "README.md"
   ],
   "repository": {
-    "url": "https://github.com/Elite-Dangerous-Plugin-Framework/edpf-npm-packages-journal"
+    "url": "https://github.com/Elite-Dangerous-Plugin-Framework/edpf-npm-packages"
   },
   "scripts": {
     "build": "tsdown",
