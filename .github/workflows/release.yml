@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - "v*"
+permissions:
+  id-token: write # Token is needed here for OIDC
+  contents: read
 
 jobs:
   release:
