@@ -21,6 +21,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./v1alpha": "./dist/v1alpha/index.js",
+    "./v1alpha/internal": "./dist/v1alpha/internal.js",
     "./package.json": "./package.json"
   },
   "publishConfig": {
